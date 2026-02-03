@@ -1,0 +1,64 @@
+{
+  "semestre": "2026-1",
+  "carrera": "ing-electronica",
+  "materias": [
+    {
+      "codigo": "111001",
+      "nombre": "Cálculo Diferencial",
+      "grupos": [
+        {
+          "id": "Grupo 01",
+          "docente": "Dr. Carlos Ramírez",
+          "horarios": [
+            { "dia": "Lunes", "horaInicio": "08:00", "horaFin": "10:00", "salon": "Edificio 320 - Aula 201" },
+            { "dia": "Miércoles", "horaInicio": "08:00", "horaFin": "10:00", "salon": "Edificio 320 - Aula 201" }
+          ]
+        },
+        {
+          "id": "Grupo 02",
+          "docente": "Dra. María López",
+          "horarios": [
+            { "dia": "Martes", "horaInicio": "14:00", "horaFin": "16:00", "salon": "Edificio 320 - Aula 305" },
+            { "dia": "Jueves", "horaInicio": "14:00", "horaFin": "16:00", "salon": "Edificio 320 - Aula 305" }
+          ]
+        }
+      ]
+    },
+    {
+      "codigo": "111003",
+      "nombre": "Álgebra Lineal",
+      "grupos": [
+        {
+          "id": "Grupo 01",
+          "docente": "Dr. Pedro Martínez",
+          "horarios": [
+            { "dia": "Martes", "horaInicio": "08:00", "horaFin": "10:00", "salon": "Edificio 320 - Aula 202" },
+            { "dia": "Jueves", "horaInicio": "08:00", "horaFin": "10:00", "salon": "Edificio 320 - Aula 202" }
+          ]
+        },
+        {
+          "id": "Grupo 02",
+          "docente": "Dra. Ana Gómez",
+          "horarios": [
+            { "dia": "Lunes", "horaInicio": "16:00", "horaFin": "18:00", "salon": "Edificio 320 - Aula 401" },
+            { "dia": "Miércoles", "horaInicio": "16:00", "horaFin": "18:00", "salon": "Edificio 320 - Aula 401" }
+          ]
+        }
+      ]
+    },
+    {
+      "codigo": "710018C",
+      "nombre": "Señales y Sistemas II",
+      "grupos": [
+        {
+          "id": "Grupo 01 - Mañana",
+          "docente": "Dr. Luis Fernández",
+          "horarios": [
+            { "dia": "Lunes", "horaInicio": "10:00", "horaFin": "12:00", "salon": "Edificio 320 - Lab 101" },
+            { "dia": "Viernes", "horaInicio": "10:00", "horaFin": "12:00", "salon": "Edificio 320 - Lab 101" }
+          ]
+        }
+      ]
+    }
+  ]
+}

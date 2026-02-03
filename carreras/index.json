@@ -1,0 +1,9 @@
+[
+  {
+    "id": "ing-electronica",
+    "name": "Ingeniería Electrónica",
+    "facultad": "Facultad de Ingeniería",
+    "archivo": "ing-electronica.json",
+    "activa": true
+  }
+]

@@ -1,0 +1,60 @@
+{
+  "carrera": "ing-electronica",
+  "semestre": "2026-1",
+  "grupos": [
+    {
+      "id": "Grupo 1 – Mañana",
+      "clases": [
+        { "codigo": "710018C", "horarios": [
+            { "dia": "Lunes",     "horaInicio": "08:00", "horaFin": "10:00", "salon": "Ed.320 Aula 201" },
+            { "dia": "Miércoles", "horaInicio": "08:00", "horaFin": "10:00", "salon": "Ed.320 Aula 201" }
+        ]},
+        { "codigo": "710040C", "horarios": [
+            { "dia": "Lunes",     "horaInicio": "10:00", "horaFin": "12:00", "salon": "Ed.320 Aula 202" },
+            { "dia": "Jueves",    "horaInicio": "08:00", "horaFin": "10:00", "salon": "Ed.320 Aula 202" }
+        ]},
+        { "codigo": "710023C", "horarios": [
+            { "dia": "Martes",    "horaInicio": "08:00", "horaFin": "10:00", "salon": "Ed.320 Aula 105" },
+            { "dia": "Jueves",    "horaInicio": "10:00", "horaFin": "12:00", "salon": "Ed.320 Aula 105" }
+        ]},
+        { "codigo": "710043C", "horarios": [
+            { "dia": "Martes",    "horaInicio": "10:00", "horaFin": "12:00", "salon": "Ed.320 Aula 301" },
+            { "dia": "Viernes",   "horaInicio": "08:00", "horaFin": "10:00", "salon": "Ed.320 Aula 301" }
+        ]},
+        { "codigo": "710030C", "horarios": [
+            { "dia": "Miércoles", "horaInicio": "10:00", "horaFin": "12:00", "salon": "Lab. Electrónica" }
+        ]},
+        { "codigo": "710017C", "horarios": [
+            { "dia": "Viernes",   "horaInicio": "10:00", "horaFin": "12:00", "salon": "Ed.320 Aula 401" }
+        ]}
+      ]
+    },
+    {
+      "id": "Grupo 2 – Tarde",
+      "clases": [
+        { "codigo": "710018C", "horarios": [
+            { "dia": "Lunes",     "horaInicio": "14:00", "horaFin": "16:00", "salon": "Ed.320 Aula 201" },
+            { "dia": "Miércoles", "horaInicio": "14:00", "horaFin": "16:00", "salon": "Ed.320 Aula 201" }
+        ]},
+        { "codigo": "710040C", "horarios": [
+            { "dia": "Martes",    "horaInicio": "14:00", "horaFin": "16:00", "salon": "Ed.320 Aula 202" },
+            { "dia": "Jueves",    "horaInicio": "14:00", "horaFin": "16:00", "salon": "Ed.320 Aula 202" }
+        ]},
+        { "codigo": "710023C", "horarios": [
+            { "dia": "Lunes",     "horaInicio": "16:00", "horaFin": "18:00", "salon": "Ed.320 Aula 105" },
+            { "dia": "Miércoles", "horaInicio": "16:00", "horaFin": "18:00", "salon": "Ed.320 Aula 105" }
+        ]},
+        { "codigo": "710043C", "horarios": [
+            { "dia": "Martes",    "horaInicio": "16:00", "horaFin": "18:00", "salon": "Ed.320 Aula 301" },
+            { "dia": "Jueves",    "horaInicio": "16:00", "horaFin": "18:00", "salon": "Ed.320 Aula 301" }
+        ]},
+        { "codigo": "710030C", "horarios": [
+            { "dia": "Viernes",   "horaInicio": "14:00", "horaFin": "16:00", "salon": "Lab. Electrónica" }
+        ]},
+        { "codigo": "710017C", "horarios": [
+            { "dia": "Viernes",   "horaInicio": "16:00", "horaFin": "18:00", "salon": "Ed.320 Aula 401" }
+        ]}
+      ]
+    }
+  ]
+}

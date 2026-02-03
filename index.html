@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificador Malla Curricular - Univalle</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/modals.css">
+</head>
+<body>
+<div id="toast"></div>
+
+<!-- ══════════ LOGIN ══════════ -->
+<div id="auth-screen" class="auth-screen">
+    <div class="auth-container">
+        <div class="auth-header">
+            <h1><i class="fas fa-graduation-cap"></i> Planificador Univalle</h1>
+            <p>Gestiona tu malla curricular de forma inteligente</p>
+        </div>
+        <div class="auth-tabs">
+            <button class="auth-tab active" onclick="AuthManager.showTab('login')">Iniciar Sesión</button>
+            <button class="auth-tab"        onclick="AuthManager.showTab('register')">Registrarse</button>
+        </div>
+        <div id="login-tab" class="auth-tab-content active">
+            <form onsubmit="AuthManager.login(event)">
+                <div class="form-group"><label><i class="fas fa-user"></i> Usuario</label><input type="text" id="login-username" required></div>
+                <div class="form-group"><label><i class="fas fa-lock"></i> Contraseña</label><input type="password" id="login-password" required></div>
+                <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
+            </form>
+        </div>
+        <div id="register-tab" class="auth-tab-content">
+            <form onsubmit="AuthManager.register(event)">
+                <div class="form-group"><label><i class="fas fa-user"></i> Usuario</label><input type="text" id="reg-username" required></div>
+                <div class="form-group"><label><i class="fas fa-envelope"></i> Email</label><input type="email" id="reg-email" required></div>
+                <div class="form-group"><label><i class="fas fa-graduation-cap"></i> Carrera</label><select id="reg-carrera" required></select></div>
+                <div class="form-group"><label><i class="fas fa-lock"></i> Contraseña</label><input type="password" id="reg-password" required></div>
+                <div class="form-group"><label><i class="fas fa-lock"></i> Confirmar</label><input type="password" id="reg-password2" required></div>
+                <button type="submit" class="btn btn-primary btn-block">Crear cuenta</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════ APP ══════════ -->
+<div id="app-screen" class="app-screen" style="display:none;">
+<div class="container">
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <h1><i class="fas fa-graduation-cap"></i> Planificador Malla Curricular</h1>
+            <p class="header-subtitle" id="user-info"></p>
+            <div class="header-controls">
+                <button class="btn btn-white" onclick="App.toggleTheme()"><i class="fas fa-moon"></i> Tema</button>
+                <button class="btn btn-white" onclick="App.openSettings()"><i class="fas fa-palette"></i> Colores</button>
+                <button class="btn btn-white" onclick="App.exportData()"><i class="fas fa-download"></i> Exportar</button>
+                <button class="btn btn-white" onclick="AuthManager.logout()"><i class="fas fa-sign-out-alt"></i> Salir</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nav -->
+    <div class="nav-tabs">
+        <button class="nav-btn active" onclick="App.switchTab('malla-oficial')"><i class="fas fa-sitemap"></i> Malla Oficial</button>
+        <button class="nav-btn" onclick="App.switchTab('malla-personal')"><i class="fas fa-user-edit"></i> Mi Malla</button>
+        <button class="nav-btn" onclick="App.switchTab('horarios')"><i class="fas fa-calendar-alt"></i> Horarios</button>
+        <button class="nav-btn" onclick="App.switchTab('ingles')"><i class="fas fa-language"></i> Inglés</button>
+        <button class="nav-btn" onclick="App.switchTab('electivas')"><i class="fas fa-puzzle-piece"></i> Electivas</button>
+        <button class="nav-btn" onclick="App.switchTab('progreso')"><i class="fas fa-chart-line"></i> Progreso</button>
+        <button class="nav-btn" onclick="App.switchTab('personalizadas')"><i class="fas fa-plus-circle"></i> Personalizadas</button>
+    </div>
+
+    <!-- TAB: Malla Oficial -->
+    <div id="tab-malla-oficial" class="tab-content active">
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-icon"><i class="fas fa-book"></i></div><div class="stat-details"><div class="stat-value" id="total-credits">0</div><div class="stat-label">Créditos totales</div></div></div>
+            <div class="stat-card"><div class="stat-icon"><i class="fas fa-check-circle"></i></div><div class="stat-details"><div class="stat-value" id="completed-credits">0</div><div class="stat-label">Créditos aprobados</div></div></div>
+            <div class="stat-card"><div class="stat-icon"><i class="fas fa-percentage"></i></div><div class="stat-details"><div class="stat-value" id="progress-percent">0%</div><div class="stat-label">Progreso</div></div></div>
+        </div>
+        <div id="malla-oficial-container"></div>
+    </div>
+
+    <!-- TAB: Mi Malla -->
+    <div id="tab-malla-personal" class="tab-content">
+        <div class="alert alert-info"><i class="fas fa-info-circle"></i><div><strong>Malla Personalizada</strong><p>Arrastra materias entre semestres. Se guarda automáticamente.</p></div></div>
+        <div class="malla-personal-controls">
+            <button class="btn btn-primary" onclick="PersonalGrid.resetToOfficial()"><i class="fas fa-undo"></i> Restaurar oficial</button>
+        </div>
+        <div id="malla-personal-container"></div>
+    </div>
+
+    <!-- TAB: Horarios -->
+    <div id="tab-horarios" class="tab-content">
+        <div class="horarios-controls">
+            <button class="btn btn-primary"   onclick="App.openModal('modal-schedule')"><i class="fas fa-plus"></i> Agregar clase</button>
+            <button class="btn btn-secondary" onclick="App.openModal('modal-import-schedule')"><i class="fas fa-file-upload"></i> Cargar catálogo</button>
+            <button class="btn btn-danger"    onclick="App.clearSchedule()"><i class="fas fa-trash"></i> Limpiar</button>
+        </div>
+        <div id="schedule-grid"></div>
+    </div>
+
+    <!-- TAB: Inglés -->
+    <div id="tab-ingles" class="tab-content">
+        <div class="courses-grid" id="ingles-container"></div>
+    </div>
+
+    <!-- TAB: Electivas -->
+    <div id="tab-electivas" class="tab-content">
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-details"><div class="stat-label">Complementarias</div><div class="stat-value" id="ec-count">0/2</div></div></div>
+            <div class="stat-card"><div class="stat-details"><div class="stat-label">Profesionales</div><div class="stat-value" id="ep-count">0/5</div></div></div>
+        </div>
+        <div id="electivas-container"></div>
+    </div>
+
+    <!-- TAB: Progreso -->
+    <div id="tab-progreso" class="tab-content">
+        <div id="progreso-container"></div>
+    </div>
+
+    <!-- TAB: Personalizadas -->
+    <div id="tab-personalizadas" class="tab-content">
+        <button class="btn btn-primary" onclick="App.openModal('modal-custom')" style="margin-bottom:20px;"><i class="fas fa-plus"></i> Agregar materia</button>
+        <div class="courses-grid" id="custom-container"></div>
+    </div>
+
+</div><!-- /container -->
+</div><!-- /app-screen -->
+
+<!-- ══════════════════════════════════════════════════════════════════════════════
+     MODALES
+     ══════════════════════════════════════════════════════════════════════════════ -->
+
+<!-- Modal: Agregar clase (con tabs: malla / catálogo) -->
+<div id="modal-schedule" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><i class="fas fa-plus"></i> Agregar clase al horario</h3>
+            <button class="close-btn" onclick="App.closeModal('modal-schedule')">×</button>
+        </div>
+        <div class="modal-body">
+            <!-- Tabs para elegir modo -->
+            <div class="modal-tabs">
+                <button class="modal-tab active" onclick="App.switchScheduleMode('manual')">Malla (manual)</button>
+                <button class="modal-tab" onclick="App.switchScheduleMode('catalogo')">Catálogo (oficial)</button>
+            </div>
+
+            <!-- Modo: Malla (manual) -->
+            <div id="schedule-mode-manual" class="schedule-mode active">
+                <div class="form-group">
+                    <label>Materia</label>
+                    <select id="schedule-course"></select>
+                </div>
+                <div class="form-group">
+                    <label>Día</label>
+                    <select id="schedule-day">
+                        <option value="Lunes">Lunes</option>
+                        <option value="Martes">Martes</option>
+                        <option value="Miércoles">Miércoles</option>
+                        <option value="Jueves">Jueves</option>
+                        <option value="Viernes">Viernes</option>
+                        <option value="Sábado">Sábado</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Hora inicio</label>
+                        <input type="time" id="schedule-start" value="08:00">
+                    </div>
+                    <div class="form-group">
+                        <label>Hora fin</label>
+                        <input type="time" id="schedule-end" value="10:00">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Docente (opcional)</label>
+                    <input type="text" id="schedule-teacher" placeholder="ej. Dr. Juan Pérez">
+                </div>
+                <div class="form-group">
+                    <label>Salón (opcional)</label>
+                    <input type="text" id="schedule-room" placeholder="ej. Ed.320 Aula 201">
+                </div>
+            </div>
+
+            <!-- Modo: Catálogo (procedural) -->
+            <div id="schedule-mode-catalogo" class="schedule-mode">
+                <div class="form-group">
+                    <label>1. Materia</label>
+                    <select id="catalogo-materia" onchange="App.onCatalogoMateriaChange()"></select>
+                </div>
+                <div class="form-group">
+                    <label>2. Docente / Grupo</label>
+                    <select id="catalogo-grupo" onchange="App.onCatalogoGrupoChange()">
+                        <option value="">— Primero selecciona materia —</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>3. Horario</label>
+                    <select id="catalogo-horario" disabled>
+                        <option value="">— Primero selecciona docente —</option>
+                    </select>
+                    <small style="color:var(--text-secondary); margin-top:4px; display:block;">
+                        Si la materia tiene varias sesiones por semana, selecciona cada una y agrégalas por separado.
+                    </small>
+                </div>
+            </div>
+
+            <!-- Opciones comunes: color y opacidad -->
+            <hr style="margin:20px 0;">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Color</label>
+                    <input type="color" id="schedule-color" value="#00703c">
+                </div>
+                <div class="form-group">
+                    <label>Opacidad: <span id="opacity-value">30%</span></label>
+                    <input type="range" id="schedule-opacity" min="0.1" max="1" step="0.05" value="0.3" 
+                           oninput="document.getElementById('opacity-value').textContent = Math.round(this.value*100)+'%'">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="App.closeModal('modal-schedule')">Cancelar</button>
+            <button class="btn btn-primary"   onclick="App.saveScheduleItem()">Guardar</button>
+        </div>
+    </div>
+</div>
+<!-- Modal: Cargar catálogo de materias -->
+<div id="modal-import-schedule" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><i class="fas fa-file-upload"></i> Cargar catálogo de materias</h3>
+            <button class="close-btn" onclick="App.closeModal('modal-import-schedule')">×</button>
+        </div>
+        <div class="modal-body">
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i>
+                <div><strong>¿Qué es esto?</strong><p>Sube un JSON con todas las materias ofrecidas (con grupos, horarios, docentes). Luego al agregar clases verás cada grupo específico para elegir.</p></div>
+            </div>
+            <div class="upload-zone" id="upload-zone">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Arrastra el JSON del catálogo aquí</p>
+                <small>o click para seleccionar</small>
+            </div>
+            <input type="file" id="horario-file-input" accept=".json" style="display:none;">
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="App.closeModal('modal-import-schedule')">Cerrar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Agregar electiva -->
+<div id="modal-electiva" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Agregar electiva</h3>
+            <button class="close-btn" onclick="App.closeModal('modal-electiva')">×</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group"><label>Código</label><input type="text" id="electiva-code" placeholder="ej. 730090C"></div>
+            <div class="form-group"><label>Nombre</label><input type="text" id="electiva-name" placeholder="ej. Historia de la Ingeniería"></div>
+            <div class="form-group"><label>Créditos</label><input type="number" id="electiva-credits" min="1" max="10" value="3"></div>
+            <div class="form-group">
+                <label>Tipo</label>
+                <select id="electiva-type">
+                    <option value="EC">Complementaria (EC)</option>
+                    <option value="EP">Profesional (EP)</option>
+                </select>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="App.closeModal('modal-electiva')">Cancelar</button>
+            <button class="btn btn-primary"   onclick="App.saveElectiva()">Guardar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Materia personalizada -->
+<div id="modal-custom" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Agregar materia personalizada</h3>
+            <button class="close-btn" onclick="App.closeModal('modal-custom')">×</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group"><label>Código</label><input type="text" id="custom-code" placeholder="ej. EXT001"></div>
+            <div class="form-group"><label>Nombre</label><input type="text" id="custom-name" placeholder="ej. Curso verano"></div>
+            <div class="form-group"><label>Créditos</label><input type="number" id="custom-credits" min="1" max="10" placeholder="3"></div>
+            <div class="form-group">
+                <label>Tipo</label>
+                <select id="custom-type">
+                    <option value="CUSTOM">Personalizada</option>
+                    <option value="EC">Electiva Complementaria</option>
+                    <option value="EP">Electiva Profesional</option>
+                </select>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="App.closeModal('modal-custom')">Cancelar</button>
+            <button class="btn btn-primary"   onclick="App.saveCustomCourse()">Guardar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Colores (estados + header + botones) -->
+<div id="modal-settings" class="modal">
+    <div class="modal-content modal-lg">
+        <div class="modal-header">
+            <h3>Personalización de colores</h3>
+            <button class="close-btn" onclick="App.closeModal('modal-settings')">×</button>
+        </div>
+        <div class="modal-body">
+            <h4>Colores de estados de materias</h4>
+            <div class="color-grid">
+                <div class="color-item"><label>Aprobada</label><input type="color" id="color-approved" value="#10b981"></div>
+                <div class="color-item"><label>Cursando</label><input type="color" id="color-current" value="#3b82f6"></div>
+                <div class="color-item"><label>Vista (perdida)</label><input type="color" id="color-seen" value="#f59e0b"></div>
+                <div class="color-item"><label>Disponible</label><input type="color" id="color-available" value="#00703c"></div>
+                <div class="color-item"><label>Bloqueada</label><input type="color" id="color-locked" value="#6b7280"></div>
+            </div>
+            <hr style="margin:24px 0;">
+            <h4>Colores de la interfaz</h4>
+            <div class="color-grid">
+                <div class="color-item"><label>Header (título)</label><input type="color" id="color-header" value="#00703c"></div>
+                <div class="color-item"><label>Botones principales</label><input type="color" id="color-buttons" value="#00703c"></div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="App.resetColors()">Restablecer</button>
+            <button class="btn btn-primary"   onclick="App.saveColors()">Guardar</button>
+        </div>
+    </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/data-manager.js"></script>
+<script src="js/prerequisite-engine.js"></script>
+<script src="js/personal-grid.js"></script>
+<script src="js/progress-tracker.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

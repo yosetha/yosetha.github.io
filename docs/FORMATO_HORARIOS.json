@@ -1,0 +1,126 @@
+{
+  "carrera": "ing-electronica",
+  "semestre": "2026-1",
+  "grupos": [
+    {
+      "id": "grupo-1",
+      "nombre": "Grupo 1 - Diurno",
+      "jornada": "Diurna",
+      "clases": [
+        {
+          "codigo": "111001",
+          "nombreMateria": "Cálculo I",
+          "profesor": "Juan Pérez",
+          "horarios": [
+            {
+              "dia": "Lunes",
+              "horaInicio": "08:00",
+              "horaFin": "10:00",
+              "salon": "Edificio 320 - Aula 201",
+              "tipo": "Teoría"
+            },
+            {
+              "dia": "Miércoles",
+              "horaInicio": "08:00",
+              "horaFin": "10:00",
+              "salon": "Edificio 320 - Aula 201",
+              "tipo": "Teoría"
+            },
+            {
+              "dia": "Viernes",
+              "horaInicio": "10:00",
+              "horaFin": "12:00",
+              "salon": "Edificio 320 - Lab 101",
+              "tipo": "Práctica"
+            }
+          ]
+        },
+        {
+          "codigo": "111003",
+          "nombreMateria": "Álgebra Lineal",
+          "profesor": "María González",
+          "horarios": [
+            {
+              "dia": "Martes",
+              "horaInicio": "08:00",
+              "horaFin": "10:00",
+              "salon": "Edificio 320 - Aula 202",
+              "tipo": "Teoría"
+            },
+            {
+              "dia": "Jueves",
+              "horaInicio": "08:00",
+              "horaFin": "10:00",
+              "salon": "Edificio 320 - Aula 202",
+              "tipo": "Teoría"
+            }
+          ]
+        },
+        {
+          "codigo": "211001",
+          "nombreMateria": "Física I",
+          "profesor": "Carlos Rodríguez",
+          "horarios": [
+            {
+              "dia": "Lunes",
+              "horaInicio": "14:00",
+              "horaFin": "16:00",
+              "salon": "Edificio 330 - Aula 101",
+              "tipo": "Teoría"
+            },
+            {
+              "dia": "Miércoles",
+              "horaInicio": "14:00",
+              "horaFin": "16:00",
+              "salon": "Edificio 330 - Aula 101",
+              "tipo": "Teoría"
+            },
+            {
+              "dia": "Viernes",
+              "horaInicio": "14:00",
+              "horaFin": "17:00",
+              "salon": "Edificio 330 - Lab Física",
+              "tipo": "Laboratorio"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grupo-2",
+      "nombre": "Grupo 2 - Nocturno",
+      "jornada": "Nocturna",
+      "clases": [
+        {
+          "codigo": "111001",
+          "nombreMateria": "Cálculo I",
+          "profesor": "Ana Martínez",
+          "horarios": [
+            {
+              "dia": "Lunes",
+              "horaInicio": "18:00",
+              "horaFin": "20:00",
+              "salon": "Edificio 320 - Aula 301",
+              "tipo": "Teoría"
+            },
+            {
+              "dia": "Miércoles",
+              "horaInicio": "18:00",
+              "horaFin": "20:00",
+              "salon": "Edificio 320 - Aula 301",
+              "tipo": "Teoría"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "notas": {
+    "formatoVersion": "1.0",
+    "descripcion": "Formato de horarios oficiales para Univalle Planner",
+    "camposRequeridos": ["codigo", "nombreMateria", "horarios"],
+    "dias": ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
+    "formatoHora": "HH:MM (24 horas)",
+    "tipos": ["Teoría", "Práctica", "Laboratorio", "Taller", "Seminario"]
+  }
+}

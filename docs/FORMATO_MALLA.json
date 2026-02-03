@@ -1,0 +1,152 @@
+{
+  "carrera": {
+    "id": "ing-electronica",
+    "name": "Ingeniería Electrónica",
+    "facultad": "Facultad de Ingeniería",
+    "universidad": "Universidad del Valle",
+    "totalCreditos": 170,
+    "duracionSemestres": 10
+  },
+  "semesters": [
+    {
+      "numero": 1,
+      "nombre": "Primer Semestre",
+      "materias": [
+        {
+          "code": "111001",
+          "name": "Cálculo I",
+          "credits": 4,
+          "type": "BG",
+          "prereq": [],
+          "coreq": []
+        },
+        {
+          "code": "111003",
+          "name": "Álgebra Lineal",
+          "credits": 4,
+          "type": "BG",
+          "prereq": [],
+          "coreq": []
+        },
+        {
+          "code": "211001",
+          "name": "Física I",
+          "credits": 4,
+          "type": "BG",
+          "prereq": [],
+          "coreq": ["111001"]
+        },
+        {
+          "code": "525001",
+          "name": "Introducción a la Ingeniería Electrónica",
+          "credits": 2,
+          "type": "PE",
+          "prereq": [],
+          "coreq": []
+        },
+        {
+          "code": "525002",
+          "name": "Programación I",
+          "credits": 3,
+          "type": "PE",
+          "prereq": [],
+          "coreq": []
+        }
+      ]
+    },
+    {
+      "numero": 2,
+      "nombre": "Segundo Semestre",
+      "materias": [
+        {
+          "code": "111002",
+          "name": "Cálculo II",
+          "credits": 4,
+          "type": "BG",
+          "prereq": ["111001"],
+          "coreq": []
+        },
+        {
+          "code": "111004",
+          "name": "Matemáticas Discretas",
+          "credits": 3,
+          "type": "BG",
+          "prereq": [],
+          "coreq": []
+        },
+        {
+          "code": "211002",
+          "name": "Física II",
+          "credits": 4,
+          "type": "BG",
+          "prereq": ["211001"],
+          "coreq": ["111002"]
+        },
+        {
+          "code": "525003",
+          "name": "Circuitos Eléctricos I",
+          "credits": 4,
+          "type": "PE",
+          "prereq": [
+            {
+              "code": "211001",
+              "requirement": "approved"
+            }
+          ],
+          "coreq": ["111002"]
+        },
+        {
+          "code": "525004",
+          "name": "Programación II",
+          "credits": 3,
+          "type": "PE",
+          "prereq": ["525002"],
+          "coreq": []
+        }
+      ]
+    }
+  ],
+  "ingles": {
+    "niveles": ["ING-1", "ING-2", "ING-3", "ING-4", "ING-5", "ING-6"],
+    "creditosPorNivel": 2,
+    "secuencial": true
+  },
+  "electivas": {
+    "complementarias": {
+      "cantidad": 4,
+      "creditosPorMateria": 3,
+      "prerequisitos": "Ninguno"
+    },
+    "profesionales": {
+      "cantidad": 4,
+      "creditosPorMateria": 3,
+      "prerequisitos": "A partir del semestre 7"
+    }
+  },
+  "notas": {
+    "formatoVersion": "1.0",
+    "descripcion": "Formato de malla curricular para Univalle Planner",
+    "camposRequeridos": ["code", "name", "credits", "type", "prereq"],
+    "tiposMateria": {
+      "BG": "Básica General",
+      "PE": "Profesional Específica",
+      "EC": "Electiva Complementaria",
+      "EP": "Electiva Profesional",
+      "CUSTOM": "Personalizada"
+    },
+    "prerequisitos": {
+      "descripcion": "Los prerequisitos pueden ser:",
+      "ejemplos": [
+        "String simple: '111001' - Debe estar aprobada, cursando o vista",
+        "Objeto con requirement: { code: '111001', requirement: 'approved' } - Solo si está aprobada",
+        "Objeto con requirement: { code: '111001', requirement: 'current' } - Si está cursando o aprobada",
+        "Objeto con requirement: { code: '111001', requirement: 'seen' } - Si fue vista, se está cursando o está aprobada",
+        "Objeto con opciones: { options: ['111001', '111002'] } - Al menos una debe cumplirse"
+      ]
+    },
+    "corequisitos": {
+      "descripcion": "Materias que deben cursarse simultáneamente o ya estar aprobadas",
+      "ejemplo": "['111001', '111002']"
+    }
+  }
+}

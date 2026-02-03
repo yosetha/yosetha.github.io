@@ -1,0 +1,162 @@
+/**
+ * DATA.JS — todas las mallas y datos embeddados.
+ * No se necesita fetch ni servidor. Funciona con file://.
+ *
+ * Para agregar una carrera nueva: agregar un entry a CARRERAS_INDEX
+ * y agregar la malla completa a CARRERAS_DATA["id"].
+ */
+
+// ── Índice de carreras disponibles ───────────────────────────────────
+var CARRERAS_INDEX = [
+    { "id": "ing-electronica", "name": "Ingeniería Electrónica", "archivo": "ing-electronica.json", "activa": true }
+];
+
+// ── Datos completos de cada carrera (keyed por id) ──────────────────
+var CARRERAS_DATA = {
+"ing-electronica": {
+  "carrera": {
+    "id": "ing-electronica",
+    "name": "Ingeniería Electrónica",
+    "facultad": "Facultad de Ingeniería",
+    "universidad": "Universidad del Valle",
+    "totalCreditos": 165,
+    "duracionSemestres": 10,
+    "resolucion": "Res 046 de 2020 - Abril 16/2020",
+    "codigo": "3744"
+  },
+  "semesters": [
+    {
+      "numero": 1,
+      "nombre": "Primer Semestre",
+      "creditos": 17,
+      "materias": [
+        {"code": "404002C", "name": "Deporte y salud", "credits": 2, "type": "BG", "prereq": [], "coreq": []},
+        {"code": "701001C", "name": "Inserción a la vida universitaria", "credits": 2, "type": "BG", "prereq": [], "coreq": []},
+        {"code": "111023C", "name": "Matemáticas básicas", "credits": 3, "type": "BG", "prereq": [], "coreq": []},
+        {"code": "750011C", "name": "Fundamentos de programación", "credits": 3, "type": "BG", "prereq": [], "coreq": []},
+        {"code": "701003C", "name": "Introducción a la ingeniería", "credits": 2, "type": "BG", "prereq": [], "coreq": []},
+        {"code": "701002C", "name": "Taller de ingeniería I", "credits": 3, "type": "BG", "prereq": [], "coreq": []},
+        {"code": "710008C", "name": "Lógica combinacional", "credits": 2, "type": "P", "prereq": [], "coreq": []}
+      ]
+    },
+    {
+      "numero": 2,
+      "nombre": "Segundo Semestre",
+      "creditos": 18,
+      "materias": [
+        {"code": "761001C", "name": "Probabilidad y estadística", "credits": 3, "type": "BG", "prereq": ["111021C"], "coreq": []},
+        {"code": "111021C", "name": "Cálculo monovariable", "credits": 3, "type": "BG", "prereq": ["111023C"], "coreq": []},
+        {"code": "750003C", "name": "Intro. programación orientada a obj.", "credits": 3, "type": "BG", "prereq": ["750011C"], "coreq": []},
+        {"code": "106012C", "name": "Física I + laboratorio", "credits": 4, "type": "BG", "prereq": ["111023C"], "coreq": []},
+        {"code": "111038C", "name": "Álgebra Lineal", "credits": 3, "type": "BG", "prereq": [], "coreq": []},
+        {"code": "710003C", "name": "Diseño lógico combinacional", "credits": 2, "type": "P", "prereq": ["750011C", "710008C"], "coreq": []}
+      ]
+    },
+    {
+      "numero": 3,
+      "nombre": "Tercer Semestre",
+      "creditos": 17,
+      "materias": [
+        {"code": "111022C", "name": "Cálculo multivariable", "credits": 3, "type": "BG", "prereq": ["111038C", "111021C"], "coreq": []},
+        {"code": "111026C", "name": "Ecuaciones diferenciales", "credits": 3, "type": "BG", "prereq": ["111021C"], "coreq": []},
+        {"code": "710010C", "name": "Teoría electromagnética I", "credits": 3, "type": "P", "prereq": ["106012C", "111021C"], "coreq": []},
+        {"code": "710011C", "name": "Metodologías de desarrollo de software", "credits": 3, "type": "P", "prereq": ["750003C"], "coreq": []},
+        {"code": "710004C", "name": "Taller de ingeniería II", "credits": 2, "type": "BEP", "prereq": ["111038C", "701002C"], "coreq": []},
+        {"code": "710007C", "name": "Diseño lógico secuencial", "credits": 3, "type": "P", "prereq": ["710003C"], "coreq": []}
+      ]
+    },
+    {
+      "numero": 4,
+      "nombre": "Cuarto Semestre",
+      "creditos": 17,
+      "materias": [
+        {"code": "710009C", "name": "Señales y sistemas I", "credits": 3, "type": "BEP", "prereq": ["111026C"], "coreq": []},
+        {"code": "750019C", "name": "Métodos numéricos", "credits": 3, "type": "BG", "prereq": ["750011C"], "coreq": []},
+        {"code": "710012C", "name": "Teoría electromagnética II", "credits": 3, "type": "P", "prereq": ["710010C", "111022C"], "coreq": []},
+        {"code": "710015C", "name": "Circuitos eléctricos I", "credits": 3, "type": "BEP", "prereq": ["710010C"], "coreq": []},
+        {"code": "710014C", "name": "Taller de ingeniería III", "credits": 2, "type": "BEP", "prereq": ["710015C", "710013C", "710004C"], "coreq": []},
+        {"code": "710013C", "name": "Sistemas basados en micro-controladores", "credits": 3, "type": "P", "prereq": ["710007C"], "coreq": []}
+      ]
+    },
+    {
+      "numero": 5,
+      "nombre": "Quinto Semestre",
+      "creditos": 17,
+      "materias": [
+        {"code": "710018C", "name": "Señales y sistemas II", "credits": 3, "type": "P", "prereq": ["710009C"], "coreq": []},
+        {"code": "710040C", "name": "Electrónica I - circuitos con amplificadores operacionales", "credits": 3, "type": "P", "prereq": ["710015C"], "coreq": []},
+        {"code": "710023C", "name": "Física de dispositivos electrónicos", "credits": 3, "type": "P", "prereq": ["710012C"], "coreq": []},
+        {"code": "710043C", "name": "Circuitos eléctricos II", "credits": 3, "type": "BEP", "prereq": ["710015C"], "coreq": []},
+        {"code": "710030C", "name": "Taller de ingeniería IV", "credits": 2, "type": "P", "prereq": ["710014C"], "coreq": []},
+        {"code": "710017C", "name": "Plataformas de alto desempeño", "credits": 3, "type": "P", "prereq": ["710013C"], "coreq": []}
+      ]
+    },
+    {
+      "numero": 6,
+      "nombre": "Sexto Semestre",
+      "creditos": 21,
+      "materias": [
+        {"code": "710035C", "name": "Sistemas de comunicaciones", "credits": 3, "type": "P", "prereq": ["710018C"], "coreq": []},
+        {"code": "710044C", "name": "Electrónica II - diodos y transistores", "credits": 3, "type": "P", "prereq": ["710040C", "710023C"], "coreq": []},
+        {"code": "710054C", "name": "Sistemas de comunicaciones II", "credits": 3, "type": "P", "prereq": ["710035C"], "coreq": []},
+        {"code": "710065C", "name": "Medidas e instrumentación", "credits": 3, "type": "P", "prereq": ["710040C"], "coreq": []},
+        {"code": "710031C", "name": "Análisis y control de sist. lineales", "credits": 3, "type": "P", "prereq": ["710018C"], "coreq": []},
+        {"code": "710059C", "name": "Electrónica de potencia", "credits": 3, "type": "P", "prereq": [], "coreq": []},
+        {"code": "710058C", "name": "Proyecto de ingeniería I", "credits": 3, "type": "P", "prereq": ["710030C"], "coreq": []},
+        {"code": "760016C", "name": "Ingeniería económica", "credits": 3, "type": "BG", "prereq": [], "coreq": []}
+      ]
+    },
+    {
+      "numero": 7,
+      "nombre": "Séptimo Semestre",
+      "creditos": 14,
+      "materias": [
+        {"code": "710047C", "name": "Sistemas electrónicos inteligentes", "credits": 3, "type": "P", "prereq": ["710044C"], "coreq": []},
+        {"code": "710062C", "name": "Análisis y compensación de sist. lineales", "credits": 3, "type": "P", "prereq": ["710031C"], "coreq": []},
+        {"code": "710066C", "name": "Proyecto de ingeniería II", "credits": 3, "type": "P", "prereq": ["710058C"], "coreq": []},
+        {"code": "760017C", "name": "Administración de proyectos", "credits": 3, "type": "BG", "prereq": ["760016C"], "coreq": []},
+        {"code": "710032C", "name": "Fundamentos de automatización", "credits": 2, "type": "P", "prereq": ["710031C"], "coreq": []}
+      ]
+    },
+    {
+      "numero": 8,
+      "nombre": "Octavo Semestre",
+      "creditos": 10,
+      "materias": [
+        {"code": "711027C", "name": "Sistemas de comunicaciones III", "credits": 2, "type": "P", "prereq": ["710054C"], "coreq": []},
+        {"code": "730078C", "name": "Impactos ambientales", "credits": 3, "type": "P", "prereq": [], "coreq": []},
+        {"code": "710074C", "name": "Proyecto de ingeniería III", "credits": 3, "type": "P", "prereq": ["710066C"], "coreq": []},
+        {"code": "710073C", "name": "Seminario de trabajo de grado", "credits": 2, "type": "P", "prereq": [], "coreq": []}
+      ]
+    },
+    {
+      "numero": 9,
+      "nombre": "Noveno Semestre",
+      "creditos": 6,
+      "materias": [
+        {"code": "730045C", "name": "Seminario constitución, legislación y ética", "credits": 2, "type": "BG", "prereq": [], "coreq": []},
+        {"code": "710081C", "name": "Trabajo de grado I", "credits": 4, "type": "P", "prereq": ["710073C"], "coreq": []}
+      ]
+    },
+    {
+      "numero": 10,
+      "nombre": "Décimo Semestre",
+      "creditos": 4,
+      "materias": [
+        {"code": "710082C", "name": "Trabajo de grado II", "credits": 4, "type": "P", "prereq": ["710081C"], "coreq": []}
+      ]
+    }
+  ],
+  "ingles": {
+    "niveles": ["204025C", "204026C", "204027C", "204028C"],
+    "creditosPorNivel": 2,
+    "nivelMinimo": "B1 MCER",
+    "totalCreditos": 8,
+    "secuencial": true
+  },
+  "electivas": {
+    "complementarias": { "cantidad": 2, "creditosPorMateria": 3, "creditosRequeridos": 6, "tipo": "EC" },
+    "profesionales":   { "cantidad": 5, "creditosPorMateria": 3, "creditosRequeridos": 14, "tipo": "EP" }
+  }
+}
+};
